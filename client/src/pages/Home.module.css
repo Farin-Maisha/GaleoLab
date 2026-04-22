@@ -1,0 +1,91 @@
+.hero {
+  padding-block: 5rem 4rem;
+  max-width: 680px;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  margin-bottom: 1.25rem;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--color-muted);
+  max-width: 500px;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  padding: 0.7rem 1.6rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.btnPrimary:hover {
+  background: var(--color-accent-dim);
+}
+
+.btnSecondary {
+  padding: 0.7rem 1.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btnSecondary:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+/* Feature strip */
+.features {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: 4rem;
+  margin-top: 4rem;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.featureIcon {
+  font-size: 1.4rem;
+  color: var(--color-accent);
+}
+
+.featureCard h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.featureCard p {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}

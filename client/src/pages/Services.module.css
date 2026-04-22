@@ -1,0 +1,73 @@
+.eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  margin-bottom: 1.25rem;
+}
+
+.header {
+  max-width: 600px;
+  margin-bottom: 3.5rem;
+}
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: var(--color-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.icon {
+  font-size: 1.6rem;
+  color: var(--color-accent);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.cardBody {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.learnMore {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.learnMore:hover {
+  opacity: 0.7;
+}
