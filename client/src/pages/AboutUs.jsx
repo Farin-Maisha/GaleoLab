@@ -1,192 +1,161 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './AboutUs.module.css'
 
-function useReveal(threshold = 0.15) {
+function useReveal(t = 0.1) {
   const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+  const [on, setOn] = useState(false)
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect() } },
-      { threshold }
+      ([e]) => { if (e.isIntersecting) { setOn(true); obs.disconnect() } }, { threshold: t }
     )
     if (ref.current) obs.observe(ref.current)
     return () => obs.disconnect()
-  }, [threshold])
-  return [ref, visible]
+  }, [t])
+  return [ref, on]
 }
 
-const CORE_TEAM = [
-  { role: 'Founder & CEO', dept: 'Leadership & Vision', initial: 'F', color: '#1e90ff' },
-  { role: 'Head of Engineering', dept: 'CFD / Simulation', initial: 'E', color: '#00aaff' },
-  { role: 'Head of Software', dept: 'Full-stack Dev', initial: 'S', color: '#0066cc' },
-  { role: 'Research & Innovation Lead', dept: 'R&D / Academic', initial: 'R', color: '#1e90ff' },
-  { role: 'Operations Lead', dept: 'Community & Ops', initial: 'O', color: '#0052b4' },
+const TEAM = [
+  { role: 'Founder & CEO',               dept: 'Leadership',     init: 'F', c: '#1565c0' },
+  { role: 'Head of Engineering',          dept: 'Simulation',     init: 'E', c: '#1e88e5' },
+  { role: 'Head of Software',            dept: 'Development',    init: 'S', c: '#0d47a1' },
+  { role: 'Research & Innovation Lead',   dept: 'R&D',            init: 'R', c: '#1565c0' },
+  { role: 'Operations Lead',             dept: 'Community',      init: 'O', c: '#1976d2' },
 ]
 
-const TECH_TEAM = [
-  { role: 'CFD & Simulation Engineers', icon: '🌊' },
-  { role: 'Frontend Developers', icon: '🖥️' },
-  { role: 'Backend Developers', icon: '⚙️' },
-  { role: 'Mobile App Developers', icon: '📱' },
-  { role: 'CAD Designers', icon: '📐' },
-  { role: 'Research Assistants', icon: '🔬' },
-]
-
-const MILESTONES = [
-  { year: '2022', title: 'GaleoLab Founded', desc: 'Started as a small engineering simulation consultancy in Dhaka.' },
-  { year: '2023', title: 'Software Division Launched', desc: 'Expanded into full-stack web and mobile development services.' },
-  { year: '2024', title: '50+ Projects Milestone', desc: 'Completed 50+ real-world projects across simulation and software.' },
-  { year: '2025', title: 'Nationwide Community', desc: 'Launched campus ambassador program across Bangladesh.' },
-  { year: '2026', title: 'Going Global', desc: 'Expanding to serve international clients and research institutions.' },
+const TECH = [
+  { icon:'🌊', role:'CFD & Simulation Engineers' },
+  { icon:'🖥️', role:'Frontend Developers' },
+  { icon:'⚙️', role:'Backend Developers' },
+  { icon:'📱', role:'Mobile App Developers' },
+  { icon:'📐', role:'CAD Designers' },
+  { icon:'🔬', role:'Research Assistants' },
 ]
 
 const VALUES = [
-  { icon: '🎯', title: 'Precision', desc: 'Engineering accuracy in every deliverable — no guesswork, only verified results.' },
-  { icon: '🔬', title: 'Research-Driven', desc: 'Every solution is grounded in engineering science and peer-validated methods.' },
-  { icon: '🚀', title: 'Scalability', desc: 'We build for growth. Systems designed to scale from day one.' },
-  { icon: '🤝', title: 'Collaboration', desc: 'We treat every client as a long-term partner, not a ticket number.' },
+  { icon:'🎯', title:'Precision',       desc:'Engineering accuracy in every deliverable — no guesswork, only verified results.' },
+  { icon:'🔬', title:'Research-Driven', desc:'Every solution is grounded in engineering science and peer-validated methods.' },
+  { icon:'🚀', title:'Scalability',     desc:'We build for growth. Systems designed to scale from day one.' },
+  { icon:'🤝', title:'Collaboration',   desc:'We treat every client as a long-term partner, not a ticket number.' },
 ]
 
-function AboutUs() {
-  const [heroRef, heroVisible] = useReveal(0.1)
-  const [missionRef, missionVisible] = useReveal(0.1)
-  const [teamRef, teamVisible] = useReveal(0.1)
-  const [timelineRef, timelineVisible] = useReveal(0.1)
-  const [valuesRef, valuesVisible] = useReveal(0.1)
+const MILESTONES = [
+  { yr:'2022', title:'Founded',           desc:'Started as an engineering simulation consultancy in Dhaka.' },
+  { yr:'2023', title:'Software Division', desc:'Expanded into full-stack web and mobile development.' },
+  { yr:'2024', title:'50+ Projects',      desc:'Crossed 50 real-world projects across simulation and software.' },
+  { yr:'2025', title:'Nationwide Network',desc:'Launched campus ambassador program across Bangladesh.' },
+  { yr:'2026', title:'Going Global',      desc:'Expanding to serve international clients and research institutions.' },
+]
+
+export default function AboutUs() {
+  const [heroRef, heroOn]       = useReveal(0.05)
+  const [msnRef, msnOn]         = useReveal(0.1)
+  const [teamRef, teamOn]       = useReveal(0.08)
+  const [tlRef, tlOn]           = useReveal(0.08)
+  const [valRef, valOn]         = useReveal(0.08)
 
   return (
     <div className={styles.page}>
 
-      {/* ── HERO ── */}
-      <section className={styles.hero}>
-        <div className={styles.heroBg} />
-        <div className={styles.heroGrid} />
-        <div className={`container ${styles.heroInner} ${heroVisible ? styles.visible : ''}`} ref={heroRef}>
-          <p className="section-label">About GaleoLab</p>
+      {/* ─── HERO ─── */}
+      <section className={styles.hero} ref={heroRef}>
+        <div className={styles.heroBg}/>
+        <div className={styles.heroGrid}/>
+        <div className={`container ${styles.heroInner} ${heroOn ? styles.on : ''}`}>
+          <p className={styles.label}>Who We Are</p>
           <h1 className={styles.heroTitle}>
-            Engineering Meets<br /><span>Innovation</span>
+            Engineering Meets <span>Innovation</span>
           </h1>
-          <p className={styles.heroSubtitle}>
-            We are a multidisciplinary engineering and software solutions company — building real-world systems for startups, researchers, and industries worldwide.
+          <p className={styles.heroSub}>
+            A multidisciplinary engineering and software solutions company — building real-world systems for startups, researchers, and industries worldwide.
           </p>
           <div className={styles.heroStats}>
-            {[
-              { n: '50+', l: 'Projects' },
-              { n: '10+', l: 'Domains' },
-              { n: '3+', l: 'Years' },
-              { n: '100+', l: 'Community' },
-            ].map(s => (
-              <div key={s.l} className={styles.heroStat}>
-                <span className={styles.heroStatN}>{s.n}</span>
-                <span className={styles.heroStatL}>{s.l}</span>
+            {[{n:'50+',l:'Projects'},{n:'10+',l:'Domains'},{n:'3+',l:'Years'},{n:'100+',l:'Community'}].map(s => (
+              <div key={s.l} className={styles.hStat}>
+                <span className={styles.hStatN}>{s.n}</span>
+                <span className={styles.hStatL}>{s.l}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── MISSION ── */}
-      <section className={styles.mission} ref={missionRef}>
-        <div className={styles.missionBg} />
+      {/* ─── MISSION ─── */}
+      <section className={styles.mission} ref={msnRef}>
         <div className="container">
-          <div className={styles.missionLayout}>
-            <div className={`${styles.missionLeft} ${missionVisible ? styles.revealed : ''}`}>
-              <p className="section-label">Our Mission</p>
-              <h2 className="section-title">
-                Bridging Engineering,<br />Technology &amp; <span>Innovation</span>
-              </h2>
-              <p className={styles.missionText}>
-                GaleoLab exists to bridge the gap between engineering science and software technology. We believe the most powerful solutions come from teams that understand both the physical laws governing engineering problems and the software systems that solve them.
+          <div className={styles.msnLayout}>
+            <div className={`${styles.msnLeft} ${msnOn ? styles.on : ''}`}>
+              <p className={styles.label}>Our Mission</p>
+              <h2 className={styles.secTitle}>Bridging Engineering,<br/>Technology & <span>Innovation</span></h2>
+              <p className={styles.bodyText}>
+                GaleoLab exists to bridge the gap between engineering science and software technology. The most powerful solutions come from teams that understand both physical laws and the software systems that solve them.
               </p>
-              <p className={styles.missionText}>
-                Our mission is to deliver industry-grade engineering and software services while building a strong, collaborative engineering ecosystem across Bangladesh and beyond.
+              <p className={styles.bodyText}>
+                Our mission is to deliver industry-grade services while building a strong, collaborative engineering ecosystem across Bangladesh and beyond.
               </p>
-              <Link to="/services" className="btn-primary">
-                Explore Our Services
-              </Link>
+              <Link to="/services" className="btn-blue">Explore Our Services</Link>
             </div>
-            <div className={`${styles.missionRight} ${missionVisible ? styles.revealed : ''}`}>
-              <div className={styles.missionCards}>
-                <div className={styles.missionCard}>
-                  <div className={styles.missionCardIcon}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-                    </svg>
+
+            <div className={`${styles.msnRight} ${msnOn ? styles.on : ''}`}>
+              {[
+                { icon:'🌊', title:'Engineering Simulation', desc:'CFD, FEA, and advanced analysis with industry tools.' },
+                { icon:'💻', title:'Software Systems',       desc:'Scalable full-stack apps, SaaS and mobile apps.' },
+                { icon:'🔬', title:'Research & Innovation',  desc:'Academic-industry collaboration and R&D projects.' },
+              ].map(c => (
+                <div key={c.title} className={styles.msnCard}>
+                  <div className={styles.msnCardIcon}>{c.icon}</div>
+                  <div>
+                    <h4 className={styles.msnCardTitle}>{c.title}</h4>
+                    <p className={styles.msnCardDesc}>{c.desc}</p>
                   </div>
-                  <h4>Engineering Simulation</h4>
-                  <p>CFD, FEA, and advanced analysis powered by industry-standard tools.</p>
                 </div>
-                <div className={styles.missionCard}>
-                  <div className={styles.missionCardIcon}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>
-                    </svg>
-                  </div>
-                  <h4>Software Systems</h4>
-                  <p>Scalable full-stack apps, SaaS products, and mobile applications.</p>
-                </div>
-                <div className={styles.missionCard}>
-                  <div className={styles.missionCardIcon}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/>
-                    </svg>
-                  </div>
-                  <h4>Research & Innovation</h4>
-                  <p>Academic-industry collaboration and simulation-based research.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── TEAM ── */}
-      <section className={styles.team} ref={teamRef} id="team">
+      {/* ─── TEAM ─── */}
+      <section className={styles.team} ref={teamRef}>
+        <div className={styles.teamBg}/>
         <div className="container">
-          <div className={`${styles.sectionHead} ${teamVisible ? styles.revealed : ''}`}>
-            <p className="section-label">The Team</p>
-            <h2 className="section-title">Meet the <span>People</span> Behind GaleoLab</h2>
-            <p className={styles.sectionSubtitle}>
-              A hybrid team of simulation engineers, software developers, and researchers working together.
-            </p>
+          <div className={`${styles.secHead} ${teamOn ? styles.on : ''}`}>
+            <p className={styles.label}>The People</p>
+            <h2 className={styles.secTitle}>Core <span>Leadership</span></h2>
           </div>
 
-          <div className={styles.coreTeam}>
-            <h3 className={styles.teamGroupTitle}>Core Leadership</h3>
-            <div className={styles.coreGrid}>
-              {CORE_TEAM.map((m, i) => (
-                <div key={i} className={`${styles.coreCard} ${teamVisible ? styles.cardVisible : ''}`}
-                  style={{ animationDelay: `${i * 0.1}s` }}>
-                  <div className={styles.coreAvatar} style={{ background: `linear-gradient(135deg, ${m.color}, ${m.color}88)` }}>
-                    {m.initial}
-                  </div>
-                  <h4 className={styles.coreRole}>{m.role}</h4>
-                  <p className={styles.coreDept}>{m.dept}</p>
+          <div className={styles.coreGrid}>
+            {TEAM.map((m,i) => (
+              <div key={i} className={`${styles.coreCard} ${teamOn ? styles.on : ''}`}
+                style={{ animationDelay:`${i*0.09}s` }}>
+                <div className={styles.avatar} style={{ background:`linear-gradient(135deg,${m.c},${m.c}88)` }}>
+                  {m.init}
                 </div>
-              ))}
-            </div>
+                <p className={styles.memberRole}>{m.role}</p>
+                <p className={styles.memberDept}>{m.dept}</p>
+              </div>
+            ))}
           </div>
 
-          <div className={styles.techTeam}>
-            <h3 className={styles.teamGroupTitle}>Technical Team</h3>
+          <div className={styles.techSection}>
+            <p className={styles.groupLabel}>Technical Team</p>
             <div className={styles.techGrid}>
-              {TECH_TEAM.map((m, i) => (
-                <div key={i} className={`${styles.techCard} ${teamVisible ? styles.cardVisible : ''}`}
-                  style={{ animationDelay: `${0.5 + i * 0.08}s` }}>
-                  <span className={styles.techIcon}>{m.icon}</span>
-                  <span className={styles.techRole}>{m.role}</span>
+              {TECH.map((t,i) => (
+                <div key={i} className={`${styles.techCard} ${teamOn ? styles.on : ''}`}
+                  style={{ animationDelay:`${0.5+i*0.07}s` }}>
+                  <span>{t.icon}</span>
+                  <span>{t.role}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className={`${styles.extNetwork} ${teamVisible ? styles.revealed : ''}`}>
-            <h3 className={styles.teamGroupTitle}>Extended Network</h3>
-            <div className={styles.extGrid}>
-              {['Research Assistants', 'Campus Ambassadors (Nationwide)', 'Industry Mentors'].map(n => (
-                <div key={n} className={styles.extCard}>
-                  <div className={styles.extDot} />
+          <div className={styles.extSection}>
+            <p className={styles.groupLabel}>Extended Network</p>
+            <div className={styles.extRow}>
+              {['Campus Ambassadors (Nationwide)', 'Industry Mentors', 'Research Assistants'].map(n => (
+                <div key={n} className={styles.extChip}>
+                  <span className={styles.extDot}/>
                   {n}
                 </div>
               ))}
@@ -195,60 +164,61 @@ function AboutUs() {
         </div>
       </section>
 
-      {/* ── TIMELINE ── */}
-      <section className={styles.timeline} ref={timelineRef}>
-        <div className={styles.timelineBg} />
+      {/* ─── TIMELINE ─── */}
+      <section className={styles.timeline} ref={tlRef}>
         <div className="container">
-          <div className={`${styles.sectionHead} ${timelineVisible ? styles.revealed : ''}`}>
-            <p className="section-label">Our Journey</p>
-            <h2 className="section-title">Building the <span>Future</span> Step by Step</h2>
+          <div className={`${styles.secHead} ${tlOn ? styles.on : ''}`}>
+            <p className={styles.label}>Our Journey</p>
+            <h2 className={styles.secTitle}>Building the <span>Future</span> Step by Step</h2>
           </div>
-          <div className={styles.timelineTrack}>
-            <div className={styles.timelineLine} />
-            {MILESTONES.map((m, i) => (
-              <div key={i} className={`${styles.milestone} ${i % 2 === 0 ? styles.milestoneLeft : styles.milestoneRight} ${timelineVisible ? styles.milestoneVisible : ''}`}
-                style={{ animationDelay: `${i * 0.15}s` }}>
-                <div className={styles.milestoneCard}>
-                  <span className={styles.milestoneYear}>{m.year}</span>
-                  <h4 className={styles.milestoneTitle}>{m.title}</h4>
-                  <p className={styles.milestoneDesc}>{m.desc}</p>
+
+          <div className={styles.tlTrack}>
+            {MILESTONES.map((m,i) => (
+              <div key={i} className={`${styles.tlItem} ${tlOn ? styles.on : ''}`}
+                style={{ animationDelay:`${i*0.12}s` }}>
+                <div className={styles.tlYear}>{m.yr}</div>
+                <div className={styles.tlDot}/>
+                <div className={styles.tlCard}>
+                  <h4 className={styles.tlTitle}>{m.title}</h4>
+                  <p className={styles.tlDesc}>{m.desc}</p>
                 </div>
-                <div className={styles.milestoneDot} />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── VALUES ── */}
-      <section className={styles.values} ref={valuesRef}>
+      {/* ─── VALUES ─── */}
+      <section className={styles.values} ref={valRef}>
+        <div className={styles.valBg}/>
         <div className="container">
-          <div className={`${styles.sectionHead} ${valuesVisible ? styles.revealed : ''}`}>
-            <p className="section-label">Our Values</p>
-            <h2 className="section-title">What Drives <span>Everything</span> We Do</h2>
+          <div className={`${styles.secHead} ${valOn ? styles.on : ''}`}>
+            <p className={styles.labelWhite}>Our Values</p>
+            <h2 className={styles.secTitleWhite}>What Drives <span>Everything</span> We Do</h2>
           </div>
-          <div className={styles.valuesGrid}>
-            {VALUES.map((v, i) => (
-              <div key={i} className={`${styles.valueCard} ${valuesVisible ? styles.cardVisible : ''}`}
-                style={{ animationDelay: `${i * 0.1}s` }}>
-                <div className={styles.valueIcon}>{v.icon}</div>
-                <h3 className={styles.valueTitle}>{v.title}</h3>
-                <p className={styles.valueDesc}>{v.desc}</p>
+          <div className={styles.valGrid}>
+            {VALUES.map((v,i) => (
+              <div key={i} className={`${styles.valCard} ${valOn ? styles.on : ''}`}
+                style={{ animationDelay:`${i*0.1}s` }}>
+                <div className={styles.valIcon}>{v.icon}</div>
+                <h3 className={styles.valTitle}>{v.title}</h3>
+                <p className={styles.valDesc}>{v.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ─── CTA ─── */}
       <section className={styles.cta}>
-        <div className={styles.ctaBg} />
-        <div className={`container ${styles.ctaInner}`}>
-          <h2 className={styles.ctaTitle}>Ready to Build Something <span>Extraordinary?</span></h2>
-          <p className={styles.ctaDesc}>From simulation to software — let's solve your hardest engineering problems together.</p>
-          <div className={styles.ctaBtns}>
-            <Link to="/#contact" className="btn-primary">Start a Project</Link>
-            <Link to="/services" className="btn-outline">View Services</Link>
+        <div className="container">
+          <div className={styles.ctaBox}>
+            <h2 className={styles.ctaTitle}>Ready to Build Something <span>Extraordinary?</span></h2>
+            <p className={styles.ctaDesc}>Let's solve your hardest engineering and software problems together.</p>
+            <div className={styles.ctaBtns}>
+              <Link to="/#contact" className="btn-blue">Start a Project</Link>
+              <Link to="/services" className="btn-outline">View Services</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -256,5 +226,3 @@ function AboutUs() {
     </div>
   )
 }
-
-export default AboutUs
