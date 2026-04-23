@@ -1,11 +1,19 @@
-import { Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import styles from './BaseLayout.module.css'
 
-export default function BaseLayout() {
+function BaseLayout() {
+  const { pathname } = useLocation()
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [pathname])
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.layout}>
       <Navbar />
       <main className={styles.main}>
         <Outlet />
@@ -14,3 +22,5 @@ export default function BaseLayout() {
     </div>
   )
 }
+
+export default BaseLayout
