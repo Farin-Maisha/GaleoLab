@@ -6,8 +6,7 @@ const NAV_LINKS = [
   { label: 'Home',     to: '/' },
   { label: 'About',    to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Blog',     to: '/#blog' },
-  { label: 'Contact',  to: '/#contact' },
+  
 ]
 
 export default function Navbar() {
