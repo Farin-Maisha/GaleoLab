@@ -1,0 +1,114 @@
+.section { padding: var(--section-padding); }
+
+.head {
+  text-align: center;
+  margin-bottom: 56px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.head.revealed { opacity: 1; transform: translateY(0); }
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: var(--gradient-card);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  position: relative;
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.card.cardVisible { animation: fadeInUp 0.55s ease forwards; }
+.card:hover { transform: translateY(-6px); }
+
+.highlight {
+  background: linear-gradient(145deg, #042f52, #023859);
+  border: 1px solid rgba(84,172,191,0.38);
+  box-shadow: 0 0 40px rgba(84,172,191,0.12),
+              0 0 0 1px rgba(84,172,191,0.22);
+}
+
+.badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 18px;
+  background: var(--gradient-blue);
+  border-radius: 50px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-bg-primary);
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(84,172,191,0.4);
+}
+
+.tier {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-primary);
+  margin-bottom: 10px;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+}
+
+.features li svg { color: var(--color-accent-primary); flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+}

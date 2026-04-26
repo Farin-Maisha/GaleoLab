@@ -3,99 +3,108 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import styles from '../../styles/Navbar.module.css'
 
 const NAV_LINKS = [
-  { label: 'Home',     to: '/' },
-  { label: 'About',    to: '/about' },
   { label: 'Services', to: '/services' },
-  
+  { label: 'Portfolio', to: '/portfolio' },
+  { label: 'About', to: '/about' },
+  { label: 'Career', to: '/career' },
 ]
 
-export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
-  const location                   = useLocation()
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
 
-  const onScroll = useCallback(() => setScrolled(window.scrollY > 40), [])
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 40)
+  }, [])
+
   useEffect(() => {
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [onScroll])
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
-  useEffect(() => setMenuOpen(false), [location.pathname])
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname])
 
-  const handleHash = (e, to) => {
-    if (to.includes('#')) {
-      const hash = to.split('#')[1]
-      e.preventDefault()
-      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' })
-      setMenuOpen(false)
+  const scrollToContact = (e) => {
+    e.preventDefault()
+    if (location.pathname !== '/') {
+      window.location.href = '/#contact'
+      return
     }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
-
-        {/* Logo */}
         <Link to="/" className={styles.logo}>
-          <div className={styles.logoBox}>
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+          <div className={styles.logoMark}>
+            <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
               <polygon points="14,2 26,8 26,20 14,26 2,20 2,8"
-                stroke="#1565c0" strokeWidth="2" fill="rgba(21,101,192,0.1)"/>
-              <circle cx="14" cy="14" r="4" fill="#1565c0"/>
+                stroke="#54ACBF" strokeWidth="1.5" fill="none"/>
+              <polygon points="14,7 21,11 21,17 14,21 7,17 7,11"
+                fill="rgba(84,172,191,0.2)" stroke="#54ACBF" strokeWidth="1"/>
+              <circle cx="14" cy="14" r="3" fill="#54ACBF"/>
             </svg>
           </div>
           <span className={styles.logoText}>Galeo<span>Lab</span></span>
         </Link>
 
-        {/* Desktop Links */}
-        <ul className={styles.links}>
-          {NAV_LINKS.map(l => (
-            <li key={l.label}>
-              {l.to.includes('#') ? (
-                <a href={l.to} className={styles.link} onClick={e => handleHash(e, l.to)}>{l.label}</a>
-              ) : (
-                <NavLink to={l.to} end={l.to === '/'}
-                  className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}>
-                  {l.label}
-                </NavLink>
-              )}
+        <ul className={styles.navLinks}>
+          {NAV_LINKS.map(link => (
+            <li key={link.label}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) =>
+                  `${styles.navLink} ${isActive ? styles.active : ''}`
+                }
+              >
+                {link.label}
+              </NavLink>
             </li>
           ))}
         </ul>
 
-        {/* CTA */}
-        <Link to="/#contact" className={styles.cta} onClick={e => handleHash(e, '/#contact')}>
+        <a href="#contact" className={styles.hireCta} onClick={scrollToContact}>
           Hire Us
-        </Link>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
 
-        {/* Burger */}
         <button
           className={`${styles.burger} ${menuOpen ? styles.open : ''}`}
-          onClick={() => setMenuOpen(p => !p)}
+          onClick={() => setMenuOpen(prev => !prev)}
           aria-label="Toggle menu"
         >
           <span /><span /><span />
         </button>
       </div>
 
-      {/* Mobile */}
-      <div className={`${styles.mobile} ${menuOpen ? styles.mobileOpen : ''}`}>
-        {NAV_LINKS.map(l => (
-          <div key={l.label}>
-            {l.to.includes('#') ? (
-              <a href={l.to} className={styles.mobileLink} onClick={e => handleHash(e, l.to)}>{l.label}</a>
-            ) : (
-              <NavLink to={l.to} end={l.to === '/'}
-                className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
-                {l.label}
-              </NavLink>
-            )}
-          </div>
+      <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileOpen : ''}`}>
+        {NAV_LINKS.map(link => (
+          <NavLink
+            key={link.label}
+            to={link.to}
+            className={({ isActive }) =>
+              `${styles.mobileLink} ${isActive ? styles.mobileActive : ''}`
+            }
+          >
+            {link.label}
+          </NavLink>
         ))}
-        <Link to="/#contact" className={`btn-blue ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>
+        <a href="#contact" className={styles.mobileCta} onClick={(e) => {
+          scrollToContact(e)
+          setMenuOpen(false)
+        }}>
           Hire Us
-        </Link>
+        </a>
       </div>
     </nav>
   )
 }
+
+export default Navbar
