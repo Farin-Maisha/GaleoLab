@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Home.module.css'
+import styles from '../styles/Home.module.css'
 
 /* ── Intersection observer hook ── */
 function useReveal(threshold = 0.12) {

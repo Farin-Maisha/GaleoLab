@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import styles from './BaseLayout.module.css'
+import styles from '../../styles/BaseLayout.module.css'
 
 function BaseLayout() {
   const { pathname } = useLocation()

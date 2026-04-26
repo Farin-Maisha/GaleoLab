@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
-import styles from './Navbar.module.css'
+import styles from '../../styles/Navbar.module.css'
 
 const NAV_LINKS = [
   { label: 'Home',     to: '/' },

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Services.module.css'
+import styles from '../styles/Services.module.css'
 
 function useReveal(t = 0.1) {
   const ref = useRef(null)

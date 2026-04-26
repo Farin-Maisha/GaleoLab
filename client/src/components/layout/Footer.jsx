@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Footer.module.css'
+import styles from '../../styles/Footer.module.css'
 
 const QUICK = [
   { label: 'Home',     to: '/' },
