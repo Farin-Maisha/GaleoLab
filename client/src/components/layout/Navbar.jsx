@@ -23,9 +23,7 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [location.pathname])
+  useEffect(() => { setMenuOpen(false) }, [location.pathname])
 
   const scrollToContact = (e) => {
     e.preventDefault()
@@ -43,10 +41,10 @@ function Navbar() {
           <div className={styles.logoMark}>
             <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
               <polygon points="14,2 26,8 26,20 14,26 2,20 2,8"
-                stroke="#54ACBF" strokeWidth="1.5" fill="none"/>
+                stroke="#2563EB" strokeWidth="1.5" fill="none"/>
               <polygon points="14,7 21,11 21,17 14,21 7,17 7,11"
-                fill="rgba(84,172,191,0.2)" stroke="#54ACBF" strokeWidth="1"/>
-              <circle cx="14" cy="14" r="3" fill="#54ACBF"/>
+                fill="rgba(37,99,235,0.15)" stroke="#2563EB" strokeWidth="1"/>
+              <circle cx="14" cy="14" r="3" fill="#2563EB"/>
             </svg>
           </div>
           <span className={styles.logoText}>Galeo<span>Lab</span></span>
@@ -68,10 +66,10 @@ function Navbar() {
         </ul>
 
         <a href="#contact" className={styles.hireCta} onClick={scrollToContact}>
-          Hire Us
+          Contact Us
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
           </svg>
         </a>
 
@@ -96,11 +94,9 @@ function Navbar() {
             {link.label}
           </NavLink>
         ))}
-        <a href="#contact" className={styles.mobileCta} onClick={(e) => {
-          scrollToContact(e)
-          setMenuOpen(false)
-        }}>
-          Hire Us
+        <a href="#contact" className={styles.mobileCta}
+          onClick={(e) => { scrollToContact(e); setMenuOpen(false) }}>
+          Contact Us
         </a>
       </div>
     </nav>
