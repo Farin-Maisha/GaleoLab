@@ -4,19 +4,19 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 22px 0;
-  transition: background var(--transition-med),
-              padding var(--transition-med),
-              box-shadow var(--transition-med);
+  padding: 20px 0;
+  background: rgba(246, 249, 252, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-med);
 }
 
 .navbar.scrolled {
-  background: rgba(1, 28, 64, 0.94);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(246, 249, 252, 0.96);
+  border-bottom: 1px solid #C7D3E0;
   padding: 14px 0;
-  box-shadow: 0 1px 0 rgba(84,172,191,0.12),
-              0 4px 24px rgba(1,28,64,0.5);
+  box-shadow: 0 2px 20px rgba(11, 31, 58, 0.06);
 }
 
 .inner {
@@ -35,16 +35,12 @@
   flex-shrink: 0;
 }
 
-.logoMark {
-  display: flex;
-  align-items: center;
-  filter: drop-shadow(0 0 8px rgba(84,172,191,0.4));
-}
+.logoMark { display: flex; align-items: center; }
 
 .logoText {
   font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
 }
@@ -63,40 +59,43 @@
   display: block;
   padding: 8px 16px;
   font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
   border-radius: var(--radius-sm);
   transition: color var(--transition-fast), background var(--transition-fast);
 }
 
-.navLink:hover { color: var(--color-text-primary); }
-.navLink.active { color: var(--color-accent-primary); }
+.navLink:hover {
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+}
+
+.navLink.active {
+  color: var(--color-accent-primary);
+  background: rgba(37, 99, 235, 0.06);
+}
 
 .hireCta {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 10px 24px;
-  background: var(--gradient-blue);
-  color: var(--color-bg-primary);
-  border-radius: 4px;
+  padding: 10px 22px;
+  background: var(--color-text-primary);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
   font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: var(--shadow-button);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .hireCta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(84,172,191,0.45);
+  background: var(--color-accent-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-button);
 }
 
 .burger {
@@ -112,7 +111,7 @@
 
 .burger span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: var(--color-text-primary);
   border-radius: 2px;
@@ -130,8 +129,8 @@
   gap: 2px;
   overflow: hidden;
   max-height: 0;
-  background: rgba(1, 28, 64, 0.97);
-  backdrop-filter: blur(20px);
+  background: rgba(246, 249, 252, 0.98);
+  border-top: 1px solid #C7D3E0;
   transition: max-height var(--transition-med), padding var(--transition-med);
   padding: 0 24px;
 }
@@ -143,37 +142,32 @@
 
 .mobileLink {
   display: block;
-  padding: 13px 16px;
+  padding: 12px 16px;
   font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-left: 2px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
 }
 
 .mobileLink:hover,
 .mobileLink.mobileActive {
   color: var(--color-accent-primary);
-  border-left-color: var(--color-accent-primary);
-  padding-left: 20px;
+  background: rgba(37, 99, 235, 0.06);
 }
 
 .mobileCta {
   display: block;
   margin-top: 12px;
   padding: 13px 28px;
-  background: var(--gradient-blue);
-  color: var(--color-bg-primary);
-  border-radius: 4px;
+  background: var(--color-text-primary);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.88rem;
+  font-weight: 600;
+  font-size: 14px;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 @media (max-width: 900px) {

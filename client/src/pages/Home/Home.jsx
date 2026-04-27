@@ -11,7 +11,7 @@ import Contact from './sections/Contact'
 
 function Home() {
   return (
-    <main>
+    <div>
       <Hero />
       <Stats />
       <ServicesPreview />
@@ -21,8 +21,7 @@ function Home() {
       <WhyUs />
       <CareerPreview />
       <Contact />
-    </main>
+    </div>
   )
 }
-
 export default Home
