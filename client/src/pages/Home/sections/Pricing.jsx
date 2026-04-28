@@ -8,7 +8,7 @@ const PLANS = [
     price: '৳3,000 – ৳15,000',
     desc: 'Perfect for startups and small projects needing quick delivery.',
     features: [
-      'Simple CAD / Simulation',
+      'Simple CAD or Simulation',
       'Basic Web Application',
       'Mobile App MVP',
       '1 Revision Round',
@@ -20,10 +20,10 @@ const PLANS = [
   {
     tier: 'Professional',
     price: '৳15,000 – ৳50,000',
-    desc: 'Full-featured solutions for growing businesses and complex engineering.',
+    desc: 'Full-featured solutions for growing businesses and complex engineering needs.',
     features: [
-      'Full CFD / FEA Simulation',
-      'SaaS / Full-stack Application',
+      'Full CFD or FEA Simulation',
+      'SaaS or Full-stack Application',
       'Cloud Deployment',
       '3 Revision Rounds',
       'Priority Support',
@@ -35,11 +35,11 @@ const PLANS = [
   {
     tier: 'Enterprise',
     price: 'Custom Pricing',
-    desc: 'Large-scale systems, R&D projects, and startup product development.',
+    desc: 'Large-scale systems, long-term R&D projects, and startup product development.',
     features: [
       'Custom System Architecture',
       'Long-term R&D Engagement',
-      'Dedicated Team',
+      'Dedicated Team Assignment',
       'Unlimited Revisions',
       '24/7 Support',
       'SLA Agreement',
@@ -50,7 +50,7 @@ const PLANS = [
 ]
 
 function Pricing() {
-  const [ref, visible] = useReveal()
+  const [ref, visible] = useReveal(0.08)
 
   const scrollToContact = (e) => {
     e.preventDefault()
@@ -59,14 +59,19 @@ function Pricing() {
 
   return (
     <section className={styles.section} id="pricing">
+      <div className={styles.bg} />
       <div className="container">
-        <div className={`${styles.head} ${visible ? styles.revealed : ''}`} ref={ref}>
+        <div
+          className={`${styles.head} ${visible ? styles.revealed : ''}`}
+          ref={ref}
+        >
           <p className="section-label">Pricing</p>
           <h2 className="section-title">
             Transparent <span>Pricing</span>
           </h2>
           <p className={styles.subtitle}>
-            Fixed-price tiers with clear deliverables. Custom scoping for enterprise.
+            Fixed-price tiers with clear deliverables.
+            Custom scoping available for enterprise projects.
           </p>
         </div>
 
@@ -86,7 +91,7 @@ function Pricing() {
               <ul className={styles.features}>
                 {p.features.map(f => (
                   <li key={f}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" strokeWidth="2.5">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
@@ -95,10 +100,15 @@ function Pricing() {
                 ))}
               </ul>
               
-                <a href="#contact"
+               <a href="#contact"
                 onClick={scrollToContact}
                 className={p.highlight ? 'btn-primary' : 'btn-outline'}
-                style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100%',
+                  marginTop: 'auto',
+                }}
               >
                 {p.cta}
               </a>
