@@ -202,3 +202,14 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 480px) {
   :root { --section-padding: 52px 0; }
 }
+
+/* Navbar.module.css */
+@media (prefers-color-scheme: dark) {
+  .logo svg path,
+  .logo svg line {
+    stroke: #e8e4dc;
+  }
+  .logo svg text:first-of-type {
+    fill: #e8e4dc;
+  }
+}

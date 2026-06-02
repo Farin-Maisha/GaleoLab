@@ -37,19 +37,45 @@ function Navbar() {
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
-        <Link to="/" className={styles.logo}>
-          <div className={styles.logoMark}>
-            <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
-              <polygon points="14,2 26,8 26,20 14,26 2,20 2,8"
-                stroke="#2563EB" strokeWidth="1.5" fill="none"/>
-              <polygon points="14,7 21,11 21,17 14,21 7,17 7,11"
-                fill="rgba(37,99,235,0.15)" stroke="#2563EB" strokeWidth="1"/>
-              <circle cx="14" cy="14" r="3" fill="#2563EB"/>
-            </svg>
-          </div>
-          <span className={styles.logoText}>Galeo<span>Lab</span></span>
-        </Link>
 
+       <Link to="/" className={styles.logo}>
+  <svg
+    width="190"
+    height="38"
+    viewBox="0 0 190 38"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-label="GaleoLab"
+  >
+    {/* G mark — absolute coords, nothing clips */}
+    <circle
+      cx="19" cy="19" r="13"
+      fill="none"
+      stroke="#18181b"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      strokeDasharray="68 12"
+      strokeDashoffset="-5"
+    />
+    <line x1="19" y1="19" x2="32" y2="19"
+      stroke="#18181b" strokeWidth="2.6" strokeLinecap="round"/>
+    <line x1="32" y1="19" x2="32" y2="13"
+      stroke="#18181b" strokeWidth="2.6" strokeLinecap="round"/>
+
+    {/* Wordmark */}
+    <text
+      x="42" y="19"
+      dominantBaseline="central"
+      fontFamily="'Plus Jakarta Sans', system-ui, sans-serif"
+      fontSize="19"
+      fontWeight="500"
+      letterSpacing="-0.5"
+    >
+      <tspan fill="#18181b">Galeo</tspan>
+      <tspan fill="#2563EB">Lab</tspan>
+    </text>
+  </svg>
+</Link>
         <ul className={styles.navLinks}>
           {NAV_LINKS.map(link => (
             <li key={link.label}>
